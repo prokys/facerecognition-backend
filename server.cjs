@@ -1,9 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt-nodejs");
+const cors = require("cors");
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 const database = {
     users: [
@@ -11,6 +13,7 @@ const database = {
             id: '123',
             name: 'John',
             email: 'john@gmail.com',
+            password: 'cookies',
             entries: 0,
             joined: new Date()
         },
@@ -18,6 +21,7 @@ const database = {
             id: '124',
             name: 'Sally',
             email: 'sally@gmail.com',
+            password: 'bananas',
             entries: 0,
             joined: new Date()
         },
@@ -36,12 +40,12 @@ app.get('/', (req, res) => {
 })
 
 app.post('/signin', (req, res) => {
-    bcrypt.compare("apples", "$2a$10$/O9un0MvgTmjRUDABgFvQO7VUxodPqkbUPjt.Pl6xIdulZXDf408K", function (err, res){
-        console.log("first guess: ", res);
-    })
-    bcrypt.compare("oragnes", "$2a$10$/O9un0MvgTmjRUDABgFvQO7VUxodPqkbUPjt.Pl6xIdulZXDf408K", function (err, res){
-        console.log("second: ", res);
-    })
+    // bcrypt.compare("apples", "$2a$10$/O9un0MvgTmjRUDABgFvQO7VUxodPqkbUPjt.Pl6xIdulZXDf408K", function (err, res){
+    //     console.log("first guess: ", res);
+    // })
+    // bcrypt.compare("oragnes", "$2a$10$/O9un0MvgTmjRUDABgFvQO7VUxodPqkbUPjt.Pl6xIdulZXDf408K", function (err, res){
+    //     console.log("second: ", res);
+    // })
     if(req.body.email === database.users[0].email && req.body.password === database.users[0].password){
         res.json('succes');
     }else{
