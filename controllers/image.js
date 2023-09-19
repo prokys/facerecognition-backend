@@ -50,12 +50,16 @@ return requestOptions;
 }
 
 fetch("https://api.clarifai.com/v2/models/face-detection/outputs", returnClarifaiRequestOptions(req.body.input))
-    .then(response => response.json())
-    .then(data => {
-        res.json(data)})
-    .catch(error => {
-        console.log('error',error);
-})
+    .then(response => {
+        if(response.statusText === 'Bad Request'){
+            res.status(400).json('Wrong url')
+        }else{
+            return response.json()
+        }
+
+    })
+    .then(data => res.json(data))
+    .catch(error => console.log('error', error))
 }
 
 module.exports = {
