@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 const handleImage = (req, res, db) =>{  
     const {id} = req.body;
     db('users')
