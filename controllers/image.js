@@ -14,11 +14,11 @@ const handleApiCall = (req, res) => {
     
   const returnClarifaiRequestOptions = (imageUrl) =>{
   // Your PAT (Personal Access Token) can be found in the portal under Authentification
-  const PAT = '62ed9203560d4d62ae37a1f93f9937b8';
+  const PAT = process.env.CL_PAT;
   // Specify the correct user_id/app_id pairings
   // Since you're making inferences outside your app's scope
-  const USER_ID = '6zsnxmq8z8rc';       
-  const APP_ID = 'my-first-application-hst4bl';
+  const USER_ID = process.env.CL_USER_ID;       
+  const APP_ID = process.env.CL_APP_ID;
   // Change these to whatever model and image URL you want to use 
   const IMAGE_URL = imageUrl;
 
