@@ -1,5 +1,3 @@
-import('node-fetch');
-
 const handleImage = (req, res, db) =>{  
     const {id} = req.body;
     db('users')
@@ -51,6 +49,8 @@ const requestOptions = {
 return requestOptions;
 }
 
+import('node-fetch').then((module) => {
+    const fetch = module.default;
 fetch("https://api.clarifai.com/v2/models/face-detection/outputs", returnClarifaiRequestOptions(req.body.input))
     .then(response => {
         if(response.statusText === 'Bad Request'){
@@ -62,6 +62,7 @@ fetch("https://api.clarifai.com/v2/models/face-detection/outputs", returnClarifa
     })
     .then(data => res.json(data))
     .catch(error => console.log('error', error))
+});
 }
 
 module.exports = {
